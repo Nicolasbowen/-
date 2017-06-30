@@ -1,0 +1,142 @@
+<div class="aw-container-wrap ">
+    <section class="mod-banner " id="js_banner">
+        <a href="javascript:;" target="_top" class="mod-banner__img banner_1" id="banner_img" style="
+        background: transparent url('/images/banner/banner1.jpg') no-repeat scroll center center;"></a>
+        <div class="mod-banner__navi">
+            <div class="js_banner_nav mod-banner_nav">
+                <a class="js_nav" href="javascript:;"></a>
+                <a class="js_nav current" href="javascript:;"></a>
+                <a class="js_nav" href="javascript:;"></a>
+                <a class="js_nav" href="javascript:;"></a>
+                <a class="js_nav" href="javascript:;"></a>
+                <a class="js_nav" href="javascript:;"></a>
+            </div>
+            <span class="mod-banner__nav-dot"><canvas id="dotCanvas"></canvas></span>
+        </div>
+        <div class="mod-banner__tool">
+            <span class="js_banner_prev mod-banner__tool-prev">
+                <span class="mod-banner__tool-white"></span>
+            <span class="mod-banner__tool-shadow"></span>
+            </span>
+            <span class="js_banner_next mod-banner__tool-next">
+                <span class="mod-banner__tool-white"></span>
+            <span class="mod-banner__tool-shadow"></span>
+            </span>
+        </div>
+    </section>
+    <div class="aw-container-wrap">
+        <div class="container">
+            <div class="row">
+                <div class="aw-content-wrap clearfix">
+                    <div class="col-sm-12 col-md-9 aw-main-content">
+                        <!--文章的检索-->
+                        <ul class="nav nav-tabs aw-nav-tabs active hidden-xs">
+                            <li><a href="#">热门</a></li>
+                            <li><a href="#">推荐</a></li>
+                            <li class="active"><a href="#">最新</a></li>
+                            <h2 class="hidden-xs"><i class="fa fa-bars"></i> 发现</h2>
+                        </ul>
+                        <!--文章的检索-->
+                        <!--文章列表-->
+                        <div class="aw-mod aw-explore-list">
+                            <div class="mod-body">
+                                <div class="aw-common-list">
+                                    <% articles.forEach(function(article){%>
+                                        <div class="aw-item">
+                                            <a class="aw-user-name hidden-xs" href="#"><img src="/images/avatar-max-img.png"></a>
+                                            <div class="aw-question-content">
+                                                <h4>
+                                                    <a href="/question/<%= article._id %>">
+                                                        <%= article.title %>
+                                                    </a>
+                                                </h4>
+                                                <div class="pull-right hidden-xs contribute">
+                                                    <span class="pull-right text-color-999">贡献</span>
+                                                    <a class="aw-user-name" href="#"><img src="/images/avatar-max-img.png"></a>
+                                                </div>
+                                                <p>
+                                                    <a href="#" class="aw-user-name">
+                                                        <%= article.author.name%>
+                                                    </a>
+                                                    <span class="text-color-999">
+                                                发起了问题 • 1 人关注 •<%= article.comment_num %> 个回复 • <%= article.click_num %>次浏览 • 3 小时前
+                                            </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <% }) %>
+                                </div>
+                            </div>
+                            <div class="mod-footer">
+                                <div class="page-control">
+                                    <nav>
+                                        <ul class="pager">
+                                            <% if (pageInfo.currentPage <= 1 ){ %>
+                                                <li class="previous"> <a type="button" class="btn btn-default" disabled="disabled">当前首页</a></li>
+                                                <% }else { %>
+                                                    <li class="previous"> <a class="btn btn-default" href="/?page=<%= pageInfo.currentPage-1 %>">上一页 </a></li>
+                                                    <% } %>
+                                                        <li class="previous" style="font-size:12px;">
+                                                            共
+                                                            <%= pageInfo.totalPage %>页，当前第
+                                                                <%= pageInfo.currentPage %> 页
+                                                        </li>
+                                                        <% if (pageInfo.currentPage >= pageInfo.totalPage  ){ %>
+                                                            <li class="next"> <a type="button" class="btn btn-default" disabled="disabled">当前尾页</a></li>
+                                                            <% }else { %>
+                                                                <li class="next"><a class="btn btn-default" href="/?page=<%= pageInfo.currentPage+1 %>">下一页</a></li>
+                                                                <% } %>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="new"></div>
+                    </div>
+
+                    <!--侧边栏-->
+                    <% include cebianlan %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/javascripts/moban/banner-effect.85179692.js"></script>
+    <script>
+        var banner = new Banner({
+            banner: '#banner_img',
+            index: 0,
+            autoplay: 8000,
+            width: 1200,
+            height: 300,
+            images: [{
+                url: '/images/banner/banner1.jpg',
+                link: 'javascript:;'
+            }, {
+                url: '/images/banner/banner2.jpg',
+                link: 'javascript:;'
+            }, {
+                url: '/images/banner/banner3.jpg',
+                link: 'javascript:;'
+            }, {
+                url: '/images/banner/banner4.jpg',
+                link: 'javascript:;'
+            }, {
+                url: '/images/banner/banner5.jpg',
+                link: 'javascript:;'
+            }, {
+                url: '/images/banner/banner6.jpg',
+                // link: 'http://www.baidu.com/'
+            }],
+            preloadImages: true,
+            pagination: '.js_banner_nav',
+            paginationClick: true,
+            prevButton: '.js_banner_prev',
+            nextButton: '.js_banner_next',
+
+            Effects: {
+                'prev': 'turnEffect',
+                'next': 'boomEffect',
+                'navi': 'pageEffect'
+            },
+        });
+    </script>

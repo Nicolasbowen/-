@@ -1,0 +1,56 @@
+<!--通过名字来进行表单认证-->
+<form method="post" ng-app="registerApp" ng-controller="registerController" name="regForm" ng-submit="postForm()">
+    <div class="panel-lite" style="opacity: 0.9;border-radius: 20px;">
+        <div class="thumbur">
+            <div class="icon-lock"></div>
+        </div>
+        <h4>用户注册</h4>
+        <div class="form-group">
+            <input type="text" class="form-control" type="text" name="name" ng-model="formData.name" ng-minlength="5" ng-maxlength="12" ng-patten="/^[a-zA-Z][a-zA-Z0-9_]{4,11}$/" required>
+            <label class="form-label">用户名</label>
+            <div style="height: 10px;"><span class="aw-reg-tips aw-reg-err" ng-show="regForm.name.$invalid && !regForm.name.$pristine" ng-cloak>
+                        <i class="aw-icon i-err"></i>
+                        请输入长度为5-12位的用户名.
+                    </span></div>
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" name="password" ng-model="formData.password" ng-pattern="/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{5,11}$/" required>
+            <label class="form-label">密　码</label>
+            <div style="height: 10px;"> <span class="aw-reg-tips aw-reg-err" ng-show="regForm.password.$invalid && !regForm.password.$pristine" ng-cloak>
+                        <i class="aw-icon i-err"></i>
+                        请输入密码为6-12字母和数字组成.
+            </span></div>
+        </div>
+        <!--<div class="form-group">
+            <input type="text" class="form-control" name="password_re" required>
+            <label class="form-label">确　认</label>
+        </div>-->
+        <div class="form-group">
+            <input type="text" class="form-control" type="email" name="email" ng-model="formData.email" ng-pattern="/^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/" required>
+            <label class="form-label">邮　箱</label>
+            <div style="height: 10px;"><span class="aw-reg-tips aw-reg-err" ng-show="regForm.email.$invalid && !regForm.email.$pristine" ng-cloak>
+                        <i class="aw-icon i-err"></i>
+                        乱输入邮箱被我发现了吧！
+                    </span></div>
+        </div>
+        <br>
+        <input type="submit" class="floating-btn  btn-large " value="ok" ng-disabled="regForm.$invalid">
+        <li style="list-style-type:none">
+            <label>
+                        <input type="checkbox" checked="checked" value="agree" name="" required>我同意
+                    </label>
+            <a href="#">用户协议</a>
+            <a href="/login" class="pull-right">已有账号</a>
+        </li>
+        <div class="mod-footer" style="height:10px;">
+            <div ng-show="error" id="errorbox" ng-cloak class="alert alert-danger text-center" role="alert">
+                {{error}}
+            </div>
+            <div ng-show="success" id="successbox" ng-cloak class="alert alert-success text-center" role="alert">
+                {{success}}
+            </div>
+        </div>
+    </div>
+
+</form>
+<br><br><br><br>

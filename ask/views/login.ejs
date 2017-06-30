@@ -1,0 +1,32 @@
+<form name="loginForm" method="post" ng-submit="postForm()" method="post" ng-app="loginApp" ng-controller="loginController">
+    <div class="panel-lite" style="opacity: 0.8;border-radius: 20px">
+        <div class="thumbur">
+            <div class="icon-lock"></div>
+        </div>
+        <h4>用户登录</h4>
+        <div class="form-group">
+            <input type="text" class="form-control" name="username" ng-model="formData.username" ng-pattern="/(^[a-zA-Z][a-zA-Z0-9_]{4,11}$)|(^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$)/" required>
+            <label class="form-label">用户名</label>
+            <div style="height:20px"><span ng-cloak ng-show="loginForm.username.$invalid && !loginForm.username.$pristine" class="text-danger">用户名/邮箱不正确</span></div>
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" name="password" ng-model="formData.password" ng-pattern="/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/" required>
+            <label class="form-label">密　码</label>
+            <div style="height: 10px;">
+                <span ng-cloak class="text-danger" ng-show="loginForm.password.$invalid && !loginForm.password.$pristine">密码由6-16字母和数字组成</span>
+            </div>
+        </div>
+        <br>
+        <input type="submit" class="floating-btn" value="GO" ng-disabled="loginForm.$invalid">
+        <div class="mod-footer">
+            <input id="login-radio" type="checkbox" value="1" name="net_auto_login" checked="checked" required>
+            <label for="login-radio">记住我</label>
+            <a href="#">&nbsp;&nbsp;忘记密码</a>
+            <span>还没有账号?</span>&nbsp;&nbsp;
+            <a href="/register">立即注册</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        </div>
+        <div class="text-center" style="height:20px;">
+            <span id="errorbox" ng-cloak ng-show="error" class="alert  alert-danger"> {{error}}</span>
+        </div>
+    </div>
+</form><br><br><br><br><br><br>

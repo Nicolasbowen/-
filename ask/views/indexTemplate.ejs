@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>
+        <%- title %>
+    </title>
+    <!--首先引入bootstrap-->
+    <link rel="stylesheet" href="/plugins/bootstrap/css/bootstrap.min.css">
+    <!--图标-->
+    <link rel="stylesheet" href="/plugins/font-awesome/css/font-awesome.min.css">
+    <!--颜色主题-->
+    <link rel="stylesheet" href="/stylesheets/base.css">
+
+    <!--动态的引入某个页面的静态资源-->
+    <link rel="stylesheet" href="<%= locals.resource %>" />
+    <!--引入jquery-->
+    <script type="text/javascript" src="/plugins/jquery.min.js"></script>
+    <!--引入bootstrap插件-->
+    <script type="text/javascript" src="/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!--引入angularJS-->
+    <script type="text/javascript" src="/plugins/angular/angular.min.js"></script>
+    <!--首页的JS文件-->
+    <script type="text/javascript" src="/javascripts/index.js"></script>
+    <!--公共的JS文件-->
+    <script type="text/javascript" src="/javascripts/public.js"></script>
+    <!--控制器文件-->
+    <script type="text/javascript" src="/javascripts/controller.js"></script>
+    <!--编辑器-->
+    <link rel="stylesheet" href="/plugins/editor/dist/simplemde.min.css">
+    <script type="text/javascript" src="/plugins/editor/dist/simplemde.min.js"></script>
+    <!--日期格式化-->
+    <script type="text/javascript" src="/javascripts/moment-with-locales.js"></script>
+
+    <!--模板的样式-->
+    <!--<link rel="icon" type="image/ico" href="/stylesheets/moban/favicon.ico">-->
+    <link media="all" href="/stylesheets/moban/index.css" type="text/css" rel="stylesheet">
+    <!--再引入我自己的CSS样式-->
+    <link rel="stylesheet" href="/stylesheets/index.css">
+    <!--返回顶部-->
+    <link rel="stylesheet" href="/stylesheets/gotop.css">
+    <!--注册登录样式-->
+    <link rel="stylesheet" href="/stylesheets/denglu.css">
+    <link rel="stylesheet" href="/stylesheets/default.css">
+
+</head>
+
+<body>
+    <nav class="navbar navbar-default" role="navigation" style="z-index:5000">
+        <div class="container-fluid container">
+            <% if(!userInfo){ %>
+                <a class="pull-right navbar-brand btn btn-success" href="/login" style="margin-left:10px; height:45px;line-height:17px;">登录</a>
+                <a class="pull-right navbar-brand " href="/register" style=" height:45px;line-height:17px;background:#2fa0ec;border-radius:5px;">注册</a>
+                <% }else{ %>
+                    <li class="dropdown pull-right navbar-brand nav">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img style="width:20px" src="/images/default-avatar.jpg"><b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="/setting">
+                                    <i class="fa fa-cogs"></i> 设置
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/logout">
+                                    <i class="fa fa-sign-out"></i> 退出
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <a id="header_publish" class="pull-right navbar-brand" href="/question/create">
+                        <i class="fa fa-book"></i> 发起
+                    </a>
+                    <% } %>
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle pull-left" data-toggle="collapse" data-target="#example-navbar-collapse">
+                <span class="sr-only">切换导航</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+                            <a href="/"><img class="navbar-brand hidden-xs" style="width:50px" src="/images/touxiang.png" alt=""></a>
+                        </div>
+
+                        <div class="collapse navbar-collapse" id="example-navbar-collapse">
+                            <ul class="nav navbar-nav">
+                                <li><a href="/" class="active"><i class="fa fa-id-card"></i> 发现</a></li>
+                                <% if ( userInfo ){ %>
+                                    <li>
+                                        <a href="/my/messages">
+                                            <i class="fa fa-bell-o"></i>通知
+                                            <% if(msg_count){%>
+                                                <span class="badge badge-important"><%= msg_count %></span>
+                                                <% } %>
+                                        </a>
+                                    </li>
+                                    <% } %>
+
+                            </ul>
+                        </div>
+        </div>
+    </nav>
+    <!--返回顶部-->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin:150px auto">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        请留下您宝贵的意见:
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <input style="border-radius:10px;" class="form-control" type="text" placeholder="">
+                    <br>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" style="border-radius:10px;">关闭
+				</button>
+                    <a type="button" class="btn btn-primary" href="/" style="border-radius:10px;">
+					提交更改
+				</a>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal -->
+    </div>
+    <div class="go-top dn" id="go-top">
+        <a href="javascript:;" class="uc-2vm"></a>
+        <div class="uc-2vm-pop dn">
+            <h2 class="title-2wm">扫一扫</h2>
+            <div class="logo-2wm-box">
+                <img src="/images/weixin.jpg" alt="" width="240" height="240">
+            </div>
+        </div>
+        <a href="javascript:;" target="_blank" class="feedback" data-toggle="modal" data-target="#myModal"></a>
+        <a href="javascript:;" class="go"></a>
+    </div>
+    <%- body %>
+        <footer class="mod-footer" id="mod-footer">
+            <div class="mod-footer__content">本网站仅供学习与交流</div>
+        </footer>
+</body>
+
+</html>
+<!--返回顶部-->
+<script>
+    $(function() {
+        $(window).on('scroll', function() {
+            var st = $(document).scrollTop();
+            if (st > 0) {
+                $('#nav').css('opacity', '0.7');
+                if ($('#main-container').length != 0) {
+                    var w = $(window).width(),
+                        mw = $('#main-container').width();
+                    if ((w - mw) / 2 > 70)
+                        $('#go-top').css({
+                            'left': (w - mw) / 2 + mw + 20
+                        });
+                    else {
+                        $('#go-top').css({
+                            'left': 'auto'
+                        });
+                    }
+                }
+                $('#go-top').fadeIn(function() {
+                    $(this).removeClass('dn');
+                });
+            } else {
+                $('#nav').css('opacity', '');
+                $('#go-top').fadeOut(function() {
+                    $(this).addClass('dn');
+                });
+            }
+        });
+        $('#go-top .go').on('click', function() {
+            $('html,body').animate({
+                'scrollTop': 0
+            }, 500);
+        });
+
+        $('#go-top .uc-2vm').hover(function() {
+            $('#go-top .uc-2vm-pop').removeClass('dn');
+        }, function() {
+            $('#go-top .uc-2vm-pop').addClass('dn');
+        });
+    });
+</script>
